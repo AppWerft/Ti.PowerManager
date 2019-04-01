@@ -5,7 +5,7 @@
 ## Usage example
 
 
-```
+```js
 import  PM  from  'de.appwerft.powermanager';
 PM.isIgnoringBatteryOptimizations();
 PM.isDeviceIdleMode();

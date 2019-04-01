@@ -73,10 +73,12 @@ public class PowermanagerModule extends KrollModule {
 			}
 			try {
 				ctx.startActivity(intent);
+				return true;
 			} catch (Exception e) {
 				Log.e(LCAT, e.getLocalizedMessage());
+				return false;
 			}
-			return true;
+			
 		}
 		return false;
 	}

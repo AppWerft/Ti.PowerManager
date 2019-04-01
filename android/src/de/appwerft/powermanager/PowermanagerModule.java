@@ -62,27 +62,23 @@ public class PowermanagerModule extends KrollModule {
 
 	// Methods
 	@Kroll.method
-	public void requestPermission() {
-		Intent intent = new Intent();
-
-		if (powerManager.isIgnoringBatteryOptimizations(packageName))
-			intent.setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
-		else {
-			intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-			intent.setData(Uri.parse("package:" + packageName));
+	public boolean requestPermission() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			Intent intent = new Intent();
+			if (powerManager.isIgnoringBatteryOptimizations(packageName))
+				intent.setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+			else {
+				intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+				intent.setData(Uri.parse("package:" + packageName));
+			}
+			try {
+				ctx.startActivity(intent);
+			} catch (Exception e) {
+				Log.e(LCAT, e.getLocalizedMessage());
+			}
+			return true;
 		}
-		try {
-			// some device doesn't has activity to handle this intent
-			// so add try catch
-			ctx.startActivity(intent);
-		} catch (Exception e) {
-			Log.e(LCAT, e.getLocalizedMessage());
-		}
-
-		powerManager = (PowerManager) getActivity().getSystemService(Context.POWER_SERVICE);
-		WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "My Lock");
-
-		// mediaPlayer.setWakeMode(ctx, PowerManager.PARTIAL_WAKE_LOCK);
+		return false;
 	}
 
 	@Kroll.method

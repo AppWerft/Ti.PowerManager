@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0.0
+apiversion: 4
+architectures: arm64-v8a armeabi-v7a x86
+description: powermanager
+author: Rainer
+license: Specify your license
+copyright: Copyright (c) 2019 by Your Company
+
+# these should not be edited
+name: powermanager
+moduleid: de.appwerft.powermanager
+guid: 4c0c0ef0-8a35-4278-ab6d-790a7304b03a
+platform: android
+minsdk: 8.0.0.GA

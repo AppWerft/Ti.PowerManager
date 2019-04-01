@@ -1,6 +1,11 @@
 
 # Axway Titanium module for working with Powermanager
 
+## Prerequisite
+
+```xml
+<uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+```
 
 ## Usage example
 
